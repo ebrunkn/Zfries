@@ -1,11 +1,13 @@
-import ProductsPage from "@/componets/Products";
-import HomeTop from "@/componets/Home";
+import Header from "@/sections/Header";
+import HomeSection from "@/sections/HomeSection";
+import ProductSection from "@/sections/ProductSection";
 
 export default function Home() {
   return (
     <>
-    <HomeTop/>
-    <ProductsPage/>
+    <Header />
+    <HomeSection />
+    <ProductSection />
     </>
   );
 }

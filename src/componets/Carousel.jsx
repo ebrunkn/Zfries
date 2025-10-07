@@ -14,7 +14,7 @@ const images = [...originalImages, ...originalImages, ...originalImages];
 
 const Carousel = ({
   className = ""
-}) => {
+}, props) => {
   const [currentIndex, setCurrentIndex] = useState(originalImages.length);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [showPopcorn, setShowPopcorn] = useState(false); // New state for the animation
@@ -51,7 +51,7 @@ const Carousel = ({
   }, [currentIndex, showPopcorn]);
 
   return (
-    <div className={`overflow-hidden flex justify-center items-center ${className}`}>
+    <div {...props} className={`overflow-hidden flex justify-center items-center ${className}`}>
       {/* Conditionally render the popcorn burst animation */}
       {showPopcorn && <PopcornBurst />}
 
