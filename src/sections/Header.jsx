@@ -56,7 +56,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="#contact" className="hover:opacity-50">
+            <Link href="wa.link/xkcud9" className="hover:opacity-50">
               <Image src='/icons/wa-logo.svg' height={25} width={25} alt="Whatsapp Logo" />
             </Link>
           </li>
