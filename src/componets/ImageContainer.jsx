@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,8 +14,19 @@ const images = [
 
 const ImageContainer = () => {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect screen size
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
+    if (isMobile) return; // disable GSAP on mobile
+
     const children = containerRef.current.querySelectorAll(".popcorn-img");
 
     // Initial stacked state
@@ -26,10 +37,10 @@ const ImageContainer = () => {
       zIndex: (i) => (i === 1 ? 20 : 5),
     });
 
-    // Animate to wide layout on scroll > 400px
+    // Scroll-triggered animation
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "top+=400 top", // scroll 400px past top
+      start: "top+=400 top",
       onEnter: () => {
         gsap.to(children[0], {
           x: "-55%",
@@ -69,17 +80,23 @@ const ImageContainer = () => {
     });
 
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, []);
+  }, [isMobile]);
 
   return (
     <div
       ref={containerRef}
-      className="flex justify-center items-center relative w-full max-w-4xl mx-auto"
+      className={`${
+        isMobile
+          ? "flex justify-center items-center gap-4 flex-wrap" // all visible on mobile
+          : "flex justify-center items-center relative"
+      } w-full max-w-4xl mx-auto`}
     >
       {images.map((src, index) => (
         <div
           key={index}
-          className="absolute flex justify-center items-center"
+          className={`${
+            isMobile ? "relative" : "absolute"
+          } flex justify-center items-center`}
         >
           <Image
             src={src}

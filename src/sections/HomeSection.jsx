@@ -2,7 +2,6 @@
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-// import Carousel from "@/componets/Carousel";
 import ImageContainer from "@/componets/ImageContainer";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -56,7 +55,7 @@ export default function HomeSection() {
   }, []);
 
   return (
-    <div className="h-[250vh] w-full">
+    <div className="md:h-[250vh] w-full">
       <section
         ref={sectionRef}
         className="h-screen w-full sticky top-0 flex flex-col items-center justify-center p-4 md:p-24 bg-gradient-to-b from-[#310F0F] to-[#A72A2A]"
@@ -64,7 +63,7 @@ export default function HomeSection() {
         <div className="w-full max-w-5xl relative">
           {/* Carousel */}
           <div ref={carouselRef} className="scale-0 relative z-30">
-            <ImageContainer wide="true" />
+            <ImageContainer />
           </div>
 
           {/* Main Text */}
