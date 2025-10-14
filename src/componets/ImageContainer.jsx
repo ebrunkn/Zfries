@@ -85,18 +85,12 @@ const ImageContainer = () => {
   return (
     <div
       ref={containerRef}
-      className={`${
-        isMobile
-          ? "flex justify-center items-center gap-4 flex-wrap" // all visible on mobile
-          : "flex justify-center items-center relative"
-      } w-full max-w-4xl mx-auto`}
+      className="flex justify-center items-center relative w-full max-w-4xl mx-auto"
     >
       {images.map((src, index) => (
         <div
           key={index}
-          className={`${
-            isMobile ? "relative" : "absolute"
-          } flex justify-center items-center`}
+          className={`absolute flex justify-center items-center`}
         >
           <Image
             src={src}

@@ -12,6 +12,46 @@ export default function HomeSection() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+
+    gsap.set(carouselRef.current, {
+      scale: 0,
+      transformOrigin: "center center",
+    });
+
+    if (isMobile) {
+      // Time-based animation for mobile/tablet
+      gsap.to(carouselRef.current, {
+        scale: 1,
+        duration: 0.6,
+        ease: "power3.out",
+        delay: 1,
+      });
+    } else {
+      // Scroll-triggered animation for desktop
+      const trigger = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top+=200 top",
+        onEnter: () => {
+          gsap.to(carouselRef.current, {
+            scale: 1,
+            duration: 0.6,
+            ease: "power3.out",
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(carouselRef.current, {
+            scale: 0,
+            duration: 0.6,
+            ease: "power3.inOut",
+          });
+        },
+      });
+      return () => trigger.kill();
+    }
+  }, []);
+
+  useEffect(() => {
     ScrollTrigger.refresh(); // ensures triggers are recalculated
   }, []);
 
@@ -62,7 +102,10 @@ export default function HomeSection() {
       >
         <div className="w-full max-w-5xl relative">
           {/* Carousel */}
-          <div ref={carouselRef} className="scale-0 relative z-30">
+          <div
+            ref={carouselRef}
+            className="flex items-center justify-center w-full h-full relative z-30"
+          >
             <ImageContainer />
           </div>
 
