@@ -4,11 +4,11 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
   const headerRef = useRef(null);
 
   useEffect(() => {
@@ -40,61 +40,28 @@ export default function Header() {
   return (
     <nav
       ref={headerRef}
-      className="fixed z-50 top-0 left-0 w-full flex items-center px-6 transition-all duration-300"
+      className="fixed z-50 top-0 left-0 w-full flex items-center px-6"
     >
-      <div className="w-full mx-auto py-4 px-10 flex justify-between items-center">
+      <div className="w-full py-4 px-5 md:px-10 flex justify-between items-center">
         {/* Logo */}
         <h1 className="text-[3.4375rem] font-bold inspiration-regular">
           Z Fries
         </h1>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden md:flex space-x-8 px-8 font-medium">
-          <li>
-            <Link href="#about" scroll={false} className="hover:text-indigo-600">
+        <ul className="flex space-x-10 md:px-8 font-medium">
+          <li className="hidden md:flex">
+            <Link href="#about" className="hover:text-white/50">
               About
             </Link>
           </li>
           <li>
-            <Link href="#contact" scroll={false} className="hover:text-indigo-600">
-              Contact
+            <Link href="#contact" className="hover:opacity-50">
+              <Image src='/icons/wa-logo.svg' height={25} width={25} alt="Whatsapp Logo" />
             </Link>
           </li>
         </ul>
-
-        {/* Mobile Menu Button */}
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
       </div>
-
-      {/* Mobile Nav Links */}
-      {isOpen && (
-        <div className="md:hidden bg-white shadow-md">
-          <ul className="flex flex-col text-[18px] space-y-4 px-6 py-4 font-medium">
-            <li>
-              <Link
-                href="#about"
-                scroll={false}
-                className="hover:text-indigo-600"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#contact"
-                scroll={false}
-                className="hover:text-indigo-600"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
     </nav>
   );
 }

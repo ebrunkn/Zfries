@@ -5,7 +5,7 @@ const ProductCard = ({ image, title }) => {
 <div
   className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/5 p-2 
              cursor-pointer transform transition duration-300 
-             hover:scale-105"
+             hover:scale-105 "
 >
   <div
     className="group bg-amber-600 p-3 rounded-xl shadow-md 
@@ -22,8 +22,8 @@ const ProductCard = ({ image, title }) => {
     />
 
     <h3
-      className="mt-3 text-center font-semibold text-white text-sm sm:text-base 
-                 truncate xl:whitespace-normal xl:overflow-visible xl:text-clip"
+      className="mt-3 w-full text-center font-semibold text-white text-sm sm:text-base 
+                 truncate xl:whitespace-normal xl:overflow-visible xl:text-clip overflow-hidden"
     >
       {title}
     </h3>

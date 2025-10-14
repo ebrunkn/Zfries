@@ -12,6 +12,10 @@ export default function HomeSection() {
   const carouselRef = useRef(null);
   const sectionRef = useRef(null);
 
+  useEffect(() => {
+    ScrollTrigger.refresh(); // ensures triggers are recalculated
+  }, []);
+
   // Page load text animation
   useEffect(() => {
     gsap.from(textRef.current, {
@@ -24,7 +28,10 @@ export default function HomeSection() {
 
   // Scroll-triggered carousel animation
   useEffect(() => {
-    gsap.set(carouselRef.current, { scale: 0, transformOrigin: "center center" });
+    gsap.set(carouselRef.current, {
+      scale: 0,
+      transformOrigin: "center center",
+    });
 
     const trigger = ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -63,7 +70,7 @@ export default function HomeSection() {
           {/* Main Text */}
           <div
             ref={textRef}
-            className="absolute h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-center px-4 py-10 z-20"
+            className="absolute h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-center py-10 z-20"
           >
             <div className="flex flex-col sm:flex-row justify-center items-center gap-0 sm:gap-2">
               <h1 className="grey-qo font-bold text-[clamp(2.5rem,5vw,8rem)] sm:text-[clamp(4rem,6vw,8rem)] leading-tight">
