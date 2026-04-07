@@ -1,55 +1,101 @@
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import Link from "next/link";
+
+const quickLinks = [
+  { href: "#products", label: "Products" },
+  { href: "#about", label: "Story" },
+  { href: "#contact", label: "Contact" },
+];
+
+const contactLinks = [
+  { href: "https://wa.me/+971554754143?text=Hi%20can%20i%20get%20chips", label: "WhatsApp", value: "+971 55 4754143" },
+  { href: "mailto:info@zfries.ae", label: "Email", value: "info@zfries.ae" },
+  { href: "tel:+971554754143", label: "Phone", value: "+971 55 4754143" },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-[#A72A2A] to-[#310F0F] text-gray-300 pt-10 pb-5 border-t border-white/30 mt-8">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-        
-        {/* Brand Section */}
-        <div>
-          <h2 className="text-2xl font-bold text-white">Z-Fries</h2>
-          <p className="mt-3 text-sm">
-            Because life is sweet <br />
-            since 1992
-          </p>
-        </div>
+    <footer className="relative pb-10 pt-6">
+      <div className="section-shell">
+        <div className="glass-panel rounded-[2.25rem] border p-8 md:p-10">
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="space-y-6">
+              <div>
+                <p className="inspiration-regular text-5xl leading-none text-white">Z Fries</p>
+                <p className="mt-2 max-w-md text-base leading-8 text-white/68">
+                  Premium popcorn, savory snacks, and a warmer, more elevated brand presentation from the first glance to the final bite.
+                </p>
+              </div>
 
-        {/* Links */}
-        <div>
-          <h3 className="text-white font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-white">Home</a></li>
-            <li><a href="#" className="hover:text-white">About</a></li>
-            <li><a href="#" className="hover:text-white">Contact</a></li>
-          </ul>
-        </div>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="mailto:info@zfries.ae"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-4 py-2 text-sm text-white/82 hover:-translate-y-0.5"
+                >
+                  <Mail size={16} />
+                  Email
+                </a>
+                <a
+                  href="https://wa.me/+971554754143?text=Hi%20can%20i%20get%20chips"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-4 py-2 text-sm text-white/82 hover:-translate-y-0.5"
+                >
+                  <MessageCircle size={16} />
+                  WhatsApp
+                </a>
+                <a
+                  href="tel:+971554754143"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-4 py-2 text-sm text-white/82 hover:-translate-y-0.5"
+                >
+                  <Phone size={16} />
+                  Call
+                </a>
+              </div>
+            </div>
 
-        {/* Resources */}
-        <div>
-          <h3 className="text-white font-semibold mb-3">Contact</h3>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-white">Ajman, UAE</a></li>
-            <li><a href="https://wa.me/+971554754143?text=Hi%20can%20i%20get%20chips" target="_blank" className="hover:text-white">+971 55 4754143 / +971 55 8218226</a></li>
-            <li><a href="mailto:someone@example.com" className="hover:text-white" target="_blank" aria-disabled='true'>info@zfries.ae</a></li>
-            <li><a href="#" className="hover:text-white">Support</a></li>
-          </ul>
-        </div>
+            <div className="grid gap-8 sm:grid-cols-2">
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-white/42">Navigate</p>
+                <ul className="mt-4 space-y-3">
+                  {quickLinks.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="inline-flex items-center gap-2 text-sm text-white/74 hover:text-white">
+                        {item.label}
+                        <ArrowUpRight size={14} />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-        {/* Social */}
-        <div>
-          <h3 className="text-white font-semibold mb-3">Follow Us</h3>
-          <div className="flex space-x-4">
-            <a href="#" className="hover:text-white"><Facebook /></a>
-            <a href="#" className="hover:text-white"><Twitter /></a>
-            <a href="#" className="hover:text-white"><Instagram /></a>
-            <a href="#" className="hover:text-white"><Linkedin /></a>
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-white/42">Reach Us</p>
+                <ul className="mt-4 space-y-4">
+                  {contactLinks.map((item) => (
+                    <li key={item.label}>
+                      <a href={item.href} className="text-sm text-white/74 hover:text-white">
+                        <span className="block text-[0.68rem] uppercase tracking-[0.28em] text-white/40">{item.label}</span>
+                        <span className="mt-1 block">{item.value}</span>
+                      </a>
+                    </li>
+                  ))}
+                  <li className="text-sm text-white/74">
+                    <span className="block text-[0.68rem] uppercase tracking-[0.28em] text-white/40">Address</span>
+                    <span className="mt-1 inline-flex items-center gap-2">
+                      <MapPin size={15} className="text-[#ffd56f]" />
+                      Ajman, UAE
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 border-t border-white/10 pt-6 text-sm text-white/50">
+            &copy; {new Date().getFullYear()} Z-Fries. Crafted for a more memorable snack experience.
           </div>
         </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="mt-10 border-t border-white/10 pt-6 text-center text-sm">
-        © {new Date().getFullYear()} Z-Fries. All rights reserved.
       </div>
     </footer>
   );
